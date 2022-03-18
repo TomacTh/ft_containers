@@ -68,8 +68,8 @@ namespace ft
 
 			reference operator*() const
 			{
-			Iterator rit = _curr;
-			return  *--rit;
+				Iterator rit = _curr;
+				return  *--rit;
 			}
 
 			pointer operator->() const
@@ -77,8 +77,8 @@ namespace ft
 
 			reverse_iterator  operator++()
 			{
-			--_curr;
-			return *this;
+				--_curr;
+				return *this;
 			}
 
 			reverse_iterator  operator++(int)
@@ -86,8 +86,8 @@ namespace ft
 
 			reverse_iterator  operator--()
 			{
-			++_curr;
-			return *this;
+				++_curr;
+				return *this;
 			}
 
 			reverse_iterator  operator--(int)
@@ -98,8 +98,8 @@ namespace ft
 
 			reverse_iterator  &operator+=(difference_type n)
 			{
-			_curr -= n;
-			return *this;
+				_curr -= n;
+				return *this;
 			}
 
 			reverse_iterator  operator-(difference_type n) const
@@ -107,8 +107,8 @@ namespace ft
 
 			reverse_iterator  &operator-=(difference_type n)
 			{
-			_curr += n;
-			return *this;
+				_curr += n;
+				return *this;
 			}
 
 			reference operator[](difference_type n) const

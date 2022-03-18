@@ -26,7 +26,7 @@ namespace ft
       pointer finish;
       pointer end_of_storage;
 
-      Ft_vector_impl(Tp_alloc_type const &a)
+      Ft_vector_impl(Tp_alloc_type const& a)
         : Tp_alloc_type(a), start(0), finish(0), end_of_storage(0) { };
     };
     typedef Alloc allocator_type;
@@ -35,9 +35,9 @@ namespace ft
     Ft_vector_impl  Ft_impl;
 
     //CONSTRUCTORS && DESTRUCTOR
-    Ft_vector_base(const allocator_type &a) : Ft_impl(a) {}
+    Ft_vector_base(const allocator_type& a) : Ft_impl(a) {}
 
-    Ft_vector_base(size_t n, const allocator_type &a)
+    Ft_vector_base(size_t n, const allocator_type& a)
     : Ft_impl(a)
     {
       this->Ft_impl.start = this->Ft_allocate(n);
@@ -134,7 +134,7 @@ namespace ft
       template<typename Integral>
       void  _dispatch_initialize(Integral n, Integral value, true_type)
       {
-        const size_type len = static_cast<size_type>(n);
+        const size_type   len = static_cast<size_type>(n);
         const value_type  &val = static_cast<value_type>(value);
 
         this->Ft_impl.start = this->Ft_allocate(len);
@@ -150,7 +150,7 @@ namespace ft
 
       template<typename Integral>
       void  _dispatch_insert(iterator position, Integral n, Integral value, true_type)
-      { _fill_insert(position, size_type(n), value_type(value)); }
+      { _fill_insert(position, n, value); }
 
       template<typename Iterator>
       void  _dispatch_insert(iterator position, Iterator first, Iterator last, false_type)
@@ -162,7 +162,7 @@ namespace ft
 
       template<typename Integral>
       void  _dispatch_assign(Integral n, Integral val, true_type)
-      { _fill_assign(n, static_cast<value_type>(val)); }
+      { _fill_assign(n, val); }
 
       template<typename Iterator>
       void  _dispatch_assign(Iterator first, Iterator last, false_type)
@@ -260,14 +260,14 @@ namespace ft
       {
         if (n > capacity())
         {
-          vector  tmp(n, val);
-          tmp.swap(*this);
-   /*        _destroy(this->Ft_impl.start, this->Ft_impl.end_of_storage);
+          //vector  tmp(n, val);
+          //tmp.swap(*this);
+          _destroy(this->Ft_impl.start, this->Ft_impl.end_of_storage);
           this->Ft_deallocate(this->Ft_impl.start, this->Ft_impl.end_of_storage - this->Ft_impl.start);
           this->Ft_impl.start = this->Ft_allocate(n);
           this->Ft_impl.finish = this->Ft_impl.start + n;
           this->Ft_impl.end_of_storage = this->Ft_impl.finish;
-          std::uninitialized_fill(this->Ft_impl.start, this->Ft_impl.finish, val); */
+          std::uninitialized_fill(this->Ft_impl.start, this->Ft_impl.finish, val);
         }
         else
         {
@@ -287,7 +287,7 @@ namespace ft
         }
       }
 
-      void  _fill_insert(iterator position, size_type n, const value_type& val)
+      void  _fill_insert(iterator position, size_type n, const value_type &val)
       {
         if (n)
         {
@@ -321,7 +321,7 @@ namespace ft
             pointer pos = std::uninitialized_copy(begin(), position, new_start);
             pointer new_finish = 0;
 
-            std::uninitialized_fill(pos, pos + n, val);
+            std::uninitialized_fill_n(pos, n, val);
             if (position < end())
               new_finish = std::uninitialized_copy(position, end(), pos + n);
             else
@@ -337,7 +337,7 @@ namespace ft
     public:
       //////////////////////CONSTRUCTORS//////////////////
       //Default constructor
-      explicit vector(const allocator_type &a = allocator_type()) : Base(a) { }
+      explicit vector(const allocator_type& a = allocator_type()) : Base(a) { }
 
       //Fill constructor
       explicit vector(size_type n, const value_type &value = value_type(),
@@ -348,7 +348,7 @@ namespace ft
       }
 
       //Copy constructor
-      vector(const vector &src) : Base(src.size(), src.Ft_get_Tp_allocator())
+      vector(const vector& src) : Base(src.size(), src.Ft_get_Tp_allocator())
       { this->Ft_impl.finish = std::uninitialized_copy(src.begin(), src.end(), this->Ft_impl.start); }
 
       //Range constructor
@@ -359,7 +359,7 @@ namespace ft
         _dispatch_initialize(first, last, Integral);
       }
 
-      vector<Tp, Alloc> & operator=(const vector<Tp, Alloc> & src)
+      vector<Tp, Alloc>& operator=(const vector<Tp, Alloc> &src)
       {
         if (&src != this)
         {

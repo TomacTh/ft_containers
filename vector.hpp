@@ -134,8 +134,8 @@ namespace ft
       template<typename Integral>
       void  _dispatch_initialize(Integral n, Integral value, true_type)
       {
-        size_type len = static_cast<size_type>(n);
-        const value_type  &val = value;
+        const size_type len = static_cast<size_type>(n);
+        const value_type  &val = static_cast<value_type>(value);
 
         this->Ft_impl.start = this->Ft_allocate(len);
         this->Ft_impl.end_of_storage = this->Ft_impl.start + len;
@@ -150,7 +150,7 @@ namespace ft
 
       template<typename Integral>
       void  _dispatch_insert(iterator position, Integral n, Integral value, true_type)
-      { _fill_insert(position, size_type(n), static_cast<value_type>(value)); }
+      { _fill_insert(position, size_type(n), value_type(value)); }
 
       template<typename Iterator>
       void  _dispatch_insert(iterator position, Iterator first, Iterator last, false_type)
@@ -262,6 +262,12 @@ namespace ft
         {
           vector  tmp(n, val);
           tmp.swap(*this);
+   /*        _destroy(this->Ft_impl.start, this->Ft_impl.end_of_storage);
+          this->Ft_deallocate(this->Ft_impl.start, this->Ft_impl.end_of_storage - this->Ft_impl.start);
+          this->Ft_impl.start = this->Ft_allocate(n);
+          this->Ft_impl.finish = this->Ft_impl.start + n;
+          this->Ft_impl.end_of_storage = this->Ft_impl.finish;
+          std::uninitialized_fill(this->Ft_impl.start, this->Ft_impl.finish, val); */
         }
         else
         {

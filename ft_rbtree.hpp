@@ -136,7 +136,7 @@ namespace ft
 		pointer	operator->() const
 		{ return &(node->value); }
 
-		self&	operator++()
+		self	&operator++()
 		{
 			node = node_increment(node);
 			return (*this);
@@ -149,7 +149,7 @@ namespace ft
 			return (tmp);
 		}
 
-		self&	operator--()
+		self	&operator--()
 		{
 			node = node_decrement(node);
 			return (*this);
@@ -201,7 +201,7 @@ namespace ft
 		pointer	operator->() const
 		{ return &(node->value); }
 
-		self&	operator++()
+		self	&operator++()
 		{
 			node = node_increment(node);
 			return (*this);
@@ -214,7 +214,7 @@ namespace ft
 			return (tmp);
 		}
 
-		self&	operator--()
+		self	&operator--()
 		{
 			node = node_decrement(node);
 			return (*this);
@@ -307,24 +307,23 @@ namespace ft
 				return (tmp);
 			}
 
-			node_ptr&	_root()
+			node_ptr	&_root()
 			{ return (_header.parent); }
 
 			const_node_ptr	_root() const
 			{ return (_header.parent); }
 
-			node_ptr&	_rightmost()
+			node_ptr	&_rightmost()
 			{ return (_header.right); }
 
 			const_node_ptr	_rightmost() const
 			{ return (_header.right); }
 
-			node_ptr&	_leftmost()
+			node_ptr	&_leftmost()
 			{ return (_header.left); }
 
 			const_node_ptr	_leftmost() const
 			{ return (_header.left); }
-
 
 			node_ptr	_end()
 			{ return (&_header); }
@@ -332,13 +331,11 @@ namespace ft
 			const_node_ptr	_end() const
 			{ return (&_header); }
 
-			static const Key&	_key(node_ptr x)
+			static const Key	&_key(node_ptr x)
 			{ return KeyOfValue()(x->value); }
 
-			static const Key&	_key(const_node_ptr x)
+			static const Key	&_key(const_node_ptr x)
 			{ return KeyOfValue()(x->value); }
-
-
 
 			node_ptr	_copy(const_node_ptr node_src, node_ptr parent)
 			{
@@ -717,10 +714,10 @@ namespace ft
 			allocator_type get_allocator()
 			{ return allocator_type();}
 
-			node_allocator&	get_node_allocator()
+			node_allocator	&get_node_allocator()
 			{ return node_allocator();}
 
-			const node_allocator&	get_node_allocator() const
+			const node_allocator	&get_node_allocator() const
 			{ return node_allocator();}
 			//Iterators
 			iterator begin()
@@ -835,14 +832,10 @@ namespace ft
 			}
 
 			ft::pair<iterator, iterator>	equal_range(const key_type &k)
-			{
-				return (ft::pair<iterator, iterator>(lower_bound(k), upper_bound(k)));
-			}
+			{ return (ft::pair<iterator, iterator>(lower_bound(k), upper_bound(k))); }
 
 			ft::pair<const_iterator, const_iterator>	equal_range(const key_type &k) const
-			{
-				return (ft::pair<const_iterator, const_iterator>(lower_bound(k), upper_bound(k)));
-			}
+			{ return (ft::pair<const_iterator, const_iterator>(lower_bound(k), upper_bound(k))); }
 
 			iterator	find(const key_type &k)
 			{
@@ -864,7 +857,7 @@ namespace ft
 					return find;
 			}
 
-	 		size_type	count(const Key& k) const
+	 		size_type	count(const Key &k) const
 			{
 				pair<const_iterator, const_iterator> pair = equal_range(k);
 				return (size_type(std::distance(pair.first, pair.second)));

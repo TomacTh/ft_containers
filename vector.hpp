@@ -262,12 +262,6 @@ namespace ft
         {
           vector  tmp(n, val);
           tmp.swap(*this);
-   /*        _destroy(this->Ft_impl.start, this->Ft_impl.end_of_storage);
-          this->Ft_deallocate(this->Ft_impl.start, this->Ft_impl.end_of_storage - this->Ft_impl.start);
-          this->Ft_impl.start = this->Ft_allocate(n);
-          this->Ft_impl.finish = this->Ft_impl.start + n;
-          this->Ft_impl.end_of_storage = this->Ft_impl.finish;
-          std::uninitialized_fill(this->Ft_impl.start, this->Ft_impl.finish, val); */
         }
         else
         {
